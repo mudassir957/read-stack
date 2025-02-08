@@ -101,7 +101,8 @@ const FileUpload = ({
 
                 return false;
             }
-        } else if (type === "video") {
+        }
+        else if (type === "video") {
             if (file.size > 50 * 1024 * 1024) {
                 toast({
                     title: "File size too large",
@@ -178,7 +179,7 @@ const FileUpload = ({
                         alt={file?.filePath || "Upload Image"}
                         path={file?.filePath || ""}
                         width={500}
-                        height={300}
+                        height={500}
                     />
                 ) : type === "video" ? (
                     <IKVideo

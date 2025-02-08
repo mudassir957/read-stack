@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { SessionProvider } from 'next-auth/react'
 import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
-import { Toast } from "@/components/ui/toast";
 import { Toaster } from "@/components/ui/toaster";
+import { auth } from "@/auth";
 
 const ibmPlexSans = localFont({
   src: [
@@ -44,18 +45,21 @@ export const metadata: Metadata = {
   description: "ReadStack is a book borrowing app",
 };
 
-const RootLayout = ({
+const RootLayout = async ({
   children,
 }: {
   children: ReactNode
 }) => {
+  const session = await auth();
   return (
     <html lang="en">
-      <body
-        className={`${ibmPlexSans.className} ${babasNeue.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <SessionProvider session={session}>
+        <body
+          className={`${ibmPlexSans.className} ${babasNeue.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </SessionProvider>
       <Toaster />
     </html>
   );
