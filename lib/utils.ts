@@ -5,10 +5,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const getInitials = (name: string): string =>
-  name
-    .split(' ')
-    .map(part => part[0])
+export const getInitials = (name?: string): string => {
+  if (!name) return ''
+
+  const parts = name.trim().split(/\s+/).filter(Boolean)
+
+  if (parts.length === 1) {
+    return parts[0].substring(0, 2).toUpperCase()
+  }
+
+  return parts
+    .map(part => part[0].toUpperCase())
     .join('')
-    .toUpperCase()
     .slice(0, 2)
+}

@@ -1,26 +1,32 @@
+"use client"
+
+import { Avatar } from '@radix-ui/react-avatar'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { signOut } from '@/auth'
-import { Button } from './ui/button'
+import { AvatarFallback } from './ui/avatar'
+import { Session } from 'next-auth'
+import { getInitials } from '@/lib/utils'
 
-const Header = () => {
+const Header = ({ session }: { session: Session }) => {
 
     return (
         <header className="my-10 flex justify-between gap-5">
             <Link href="/"><Image src="/icons/logo.svg" alt='logo' height={40} width={40}></Image></Link>
 
-            <ul className="flex flex-row items-center gap-8">
+            <ul>
                 <li>
-                    <form action={async () => {
-                        "use server";
-
-                        await signOut();
-                    }}
-                        className='mb-10'
-                    >
-                        <Button>Logout</Button>
-                    </form>
+                    {session?.user ? (
+                        <Link href="/profile">
+                            <Avatar>
+                                <AvatarFallback className='w-10 h-10'>
+                                    {getInitials(session?.user?.name ?? "IN")}
+                                </AvatarFallback>
+                            </Avatar>
+                        </Link>
+                    ) : (
+                        <Link href="/login">Login</Link>
+                    )}
                 </li>
             </ul>
         </header>
