@@ -5,20 +5,12 @@ import { books, borrowRecords, users } from "@/database/schema";
 import { db } from "@/database/drizzle";
 import { eq } from "drizzle-orm";
 
-const Page = async ({ children }: { children: React.ReactNode }) => {
-
-    const session = await auth()
-
-    if (!session?.user?.id) {
-        throw new Error("User ID is required");
-    }
+const Page = async () => {
 
     const borrowedBooks =
-        await db.select()
+        await db.selectDistinctOn([borrowRecords.bookId])
             .from(books)
             .innerJoin(borrowRecords, eq(borrowRecords.bookId, books.id))
-            .innerJoin(users, eq(borrowRecords.userId, users.id))
-            .where(eq(users.id, session?.user?.id))
 
     const formattedBooks = borrowedBooks.map((record) => record.books);
 

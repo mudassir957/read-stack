@@ -38,11 +38,19 @@
 
   /* Book Card */
   .book-title {
-    @apply mt-2 line-clamp-1 text-base font-semibold text-white xs:text-xl;
+    @apply mt-2 line-clamp-1 text-base font-semibold text-blue-400 xs:text-xl;
   }
 
   .book-genre {
-    @apply mt-1 line-clamp-1 text-sm italic text-light-100 xs:text-base;
+    @apply mt-1 line-clamp-1 text-sm italic text-blue-300 xs:text-base;
+  }
+  /* User Card */
+  .user-name {
+    @apply mt-2 line-clamp-1 text-base font-semibold text-dark-100 xs:text-xl;
+  }
+
+  .user-email {
+    @apply mt-1 line-clamp-1 text-sm italic text-dark-100 xs:text-base;
   }
 
   .book-loaned {

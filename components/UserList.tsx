@@ -1,28 +1,27 @@
+import { User } from '@/type';
 import React from 'react'
-import BookCard from './BookCard';
-import { Book } from '@/type';
+import UserCard from './UserCard';
 
 interface Props {
     title: string;
-    books: Book[];
+    users: User[];
     containerClassName?: string;
 }
 
-const BookList = ({ title, books, containerClassName }: Props) => {
+const UserList = ({ title, users, containerClassName }: Props) => {
 
-    if (books.length < 2) return;
-
+    if (users.length === 0) return;
     return (
         <section className={containerClassName}>
             <h2 className="font-bebas-neue text-4xl">{title}</h2>
 
             <ul className="book-list">
-                {books.map((book) => (
-                    <BookCard key={book.title} {...book} />
+                {users.map((user) => (
+                    <UserCard key={user.id} {...user} />
                 ))}
             </ul>
         </section>
-    );
+    )
 }
 
-export default BookList
+export default UserList

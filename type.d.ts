@@ -16,6 +16,19 @@ interface Book {
   createdAt: Date | null
 }
 
+interface User {
+  id: string
+  fullName: string
+  email: string
+  universityId: number
+  password: string
+  universityCard: string
+  status: string
+  role: string
+  lastActivityDate: Date | null
+  createdAt: Date | null
+}
+
 interface AuthCredentials {
   fullName: string
   email: string
